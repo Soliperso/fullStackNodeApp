@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+// Requiring routes
+const productsRoutes = require("./routes/products");
 
 // App Config
 app.set("view engine", "ejs");
@@ -23,6 +25,9 @@ mongoose.connect("mongodb://localhost/eShop", {
 let db = mongoose.connection;
 db.on("err", console.error.bind(console, "Connection error"));
 db.once("open", () => console.log("Successfully connected to DB 💾"));
+
+// Routes
+app.use(productsRoutes);
 
 // listening to the server on port 3000
 const port = process.env.PORT || 5000;
